@@ -1,0 +1,30 @@
+database stores7
+
+screen
+{
+                          ORDER FORM
+
+    Order No:  [f000       ]    Order Date:  [f001      ]  
+ Customer No:  [f002       ]    Total Price: [f009      ]
+Instructions:  [f003                                    ]
+     Backlog:  [a]               PO Number:  [f004      ]     
+   Ship Date:  [f005      ]    Ship Weight:  [f006      ]    
+ Ship Charge:  [f007     ]       Date Paid:  [f008      ]      
+}
+
+tables
+customer
+orders
+
+attributes
+f000 = orders.order_num;
+f001 = orders.order_date;
+f002 = orders.customer_num;
+f003 = orders.ship_instruct;
+a = orders.backlog;
+f004 = orders.po_num;
+f005 = orders.ship_date;
+f006 = orders.ship_weight;
+f007 = orders.ship_charge;
+f008 = orders.paid_date;
+f009 = formonly.t_price TYPE MONEY;

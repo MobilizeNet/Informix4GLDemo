@@ -1,0 +1,22 @@
+DATABASE stores7
+
+SCREEN
+{
+     First Name         Last Name          Company
+
+[f001           ] [f002           ] [f003                ]
+[f001           ] [f002           ] [f003                ]
+[f001           ] [f002           ] [f003                ]
+[f001           ] [f002           ] [f003                ]
+}
+
+TABLES
+customer
+
+ATTRIBUTES
+f001 = customer.fname;
+f002 = customer.lname;
+f003 = customer.company;
+
+INSTRUCTIONS
+SCREEN RECORD s_cust[4] (customer.*)

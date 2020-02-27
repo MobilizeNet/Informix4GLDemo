@@ -1,0 +1,412 @@
+.101
+The Customer option presents you with a menu that allows you to:
+
+      o   Add new customers to the database
+      o   Locate customers in the database
+      o   Update customer files
+      o   Remove customers from the database
+
+.102
+The Orders option presents you with a menu that allows you to:
+
+      o   Enter a new order and print an invoice
+      o   Update an existing order
+      o   Look up and display orders
+      o   Remove orders from the database
+
+.103
+The Stock option presents you with a menu that allows you to:
+
+      o   Add new items to the list of stock
+      o   Look up and display stock items
+      o   Modify current stock descriptions and values
+      o   Remove items from the list of stock
+
+.104
+The Reports option presents you with a menu that allows you to:
+
+      o   Select and print mailing labels sorted by zip code
+      o   Print a report of current accounts receivable
+      o   Print a report of backloged orders
+      o   Print a list of current stock available
+      o   Change the report output options
+
+.105
+The Exit option leaves the program and returns you to the operating system.
+
+.201
+The One-add option enables you to enter data on new customers to the database.
+You may get assistance on what input is appropriate for each field by pressing
+the function key F1 when the cursor is in the field.   When you  have  entered
+all the data you want for a given customer, press ESC to enter the data in the
+database. If you want to abort a given entry and not write it to the database,
+press the INTERRUPT key (usually DEL or CTRL-C).
+
+.202
+The  Many-add  option  enables  you  to  enter  data  on  new customers to the
+database.  You may get assistance on what input is appropriate for each  field
+by  pressing  the  function key F1 when the cursor is in the field.   When you
+have  entered  all  the data you want for a given customer, press ESC to enter
+the data in the database.  If you want to abort a given entry and not write it
+to  the database, press the INTERRUPT key (usually DEL or CTRL-C).  After each
+entry, the cursor will move to the beginning of the form and await  the  entry
+of the next customer.  If you have no more customers to add, press  CTRL-Y  to
+return to the CUSTOMER Menu.
+
+.203
+The Find-cust option allows you to select one or more customers and to display
+their  data  on the screen by using query-by-example input.  Use the RETURN or
+arrow  keys to move through the form.  Enter the criteria you want the program
+to use in searching for customers.  Your options include:
+
+    o  Literal values
+    o  A range of values (separated by ":")
+    o  A list of values (separated by "|")
+    o  Relational operators (for example ">105")
+    o  Wildcards like ? and * to match single or any number of characters
+
+.204
+The  Update-cust  option  enables  you  to  alter  data on old customers in the
+database.  You must first select a current customer row to deal with  by  using
+the  Find-cust option.  You may get assistance on what input is appropriate for
+each  field  by  pressing  the function key F1 when the cursor is in the field.
+When  you have altered all the data you want for a given customer, press ESC to
+enter the data in the database.  If you want to abort the changes and not write
+them to the database, press the INTERRUPT key (usually DEL or CTRL-C).
+
+.205
+The  Delete-cust option enables you to remove customers from the database.  You
+must  first  select  a current customer row to deal with by using the Find-cust
+option.  For your protection, you will be asked  to  confirm  that  the  record
+should  be  deleted.   Once  deleted,  it  cannot  be restored.  Customers with
+active orders can not be deleted.
+.206
+The Exit option of the CUSTOMER Menu takes you back to the MAIN Menu.
+
+.301
+The  Add-order  option enables you to add a new order for an existing customer.
+You must first select the desired  customer  using  query-by-example  selection
+criteria.  You will  then  enter  the  order  date,  PO  number,  and  shipping
+instructions.  The detail line items are then entered into a scrolling  display
+array.  Up to ten items may be entered using the four line screen array.  After
+the  new  order is entered, an invoice is automatically generated and displayed
+on the screen.
+.302
+The Update-order option is currently not implemented.
+.303
+The  Find-order  option  enables  you  to browse through and select an existing
+order.  You must first select the desired customer (or customers) who's  orders
+you  wish  to  scan.  For each customer selected, each corresponding order will
+be  displayed on the screen for examination.  You may either select an invoice,
+skip to the next invoice, or cancel processing.
+.304
+The Delete-order option is currently not implemented.
+.305
+The Exit option of the ORDER Menu returns you to the MAIN Menu.
+
+.311
+You  may enter up to ten line items into the scrolling screen array.  A number
+of  standard  functions  are available for manipulating the cursor in a screen
+array.
+
+    o  F1	Insert new line in the screen array
+    o  F2	Remove the current line from the screen array
+    o  F3	Page down one page in the screen array
+    o  F4	Page up one page in the screen array
+    o  ESC	Exit input array
+    o  CTRL-B	When in the Stock Number or Manufacturer Code fields,
+		a window will open in the middle of the screen and
+		display a scrolled list of all items in stock, identified
+		by the stock number and manufacturer.  Using F3, F4, and
+		the up and down arrow keys, move the cursor to the line
+		that identifies the desired item and hit ESC.  The 
+		window will disappear and the selected information will
+		automatically appear in the proper line.
+    o  etc...	The arrow-keys, and the standard field editing keys
+		are available
+
+The item_total field will be displayed in reverse-video green for total 
+amounts over $500.
+.401
+The Add-stock option is currently not implemented.
+.402
+The Find-stock option is currently not implemented.
+.403
+The Update-stock option is currently not implemented.
+.404
+The Delete-stock option is currently not implemented.
+.405
+The Exit option of the STOCK Menu returns you to the MAIN Menu.
+
+.501
+The Labels option enables you to create a  list  of  mailing  labels  generated
+using a query-by-example specification.  You will be prompted  for  the  output
+file name.
+.502
+The  Accounts-receivable  option enables you to create a report summarizing all
+unpaid  orders in the database.  You will be prompted for the output file name.
+.503
+The Backlog option is currently not implemented.
+.504
+The Stock-list option is currently not implemented.
+.505
+The  Options  option  enables  you  to  change  the  destination  of any report
+generated during the current session.  The default option  is  to  display  all
+reports  on the terminal screen.  The other options are to print all reports to
+either the printer or an operating system file.
+.506
+The Exit option of the REPORT Menu returns you to the MAIN Menu.
+
+.1001
+The Number field on the Customer Form contains the serial integer  assigned  to
+the  customer  row  when  the  data  for the customer is first entered into the
+database.  It is a unique number for each customer.  The lowest value  of  this
+field is 101.
+.1002
+The first section following the Name label should contain the first name of the
+contact person at the customer's company.
+.1003
+The second section following the Name label should contain the last name of the
+contact person at the customer's company.
+.1004
+This field should contain the name of the customer's company.
+.1005
+The  first  line  of the Address section of the form should contain the mailing
+address of the company.
+.1006
+The  second  line  of  the Address section of the form should be used only when
+there  is  not  sufficient room in the first line to contain the entire mailing
+address.
+.1007
+The City field should contain the city name portion of the mailing  address  of
+the customer.
+.1008
+Enter  the two-character code for the desired state.  If no code is entered, or
+the entered code is not in the program's list of valid entries, a  window  will
+appear  on the screen with a scrolling list of all states and codes.  Using the
+F3,  F4,  up  and  down  arrow keys, move the cursor to the line containing the
+desired state.  After typing ESC, the window will disappear  and  the  selected
+state code will appear in the customer entry screen.
+.1009
+Enter the five digit Zip Code in this field.
+.1010
+Enter  the  telephone  number  of the contact person at the customer's company.
+Include the Area Code and extension using the format "###-###-#### #####".
+
+.2001
+The following is the INFORMIX-4GL source for the main menu.  Note that only
+the text is specified by the MENU statement; the structure and runtime menu
+functions are built-in.
+
+    OPTIONS
+	HELP FILE "helpdemo"
+
+    CALL ring_menu()
+    MENU "MAIN"
+	COMMAND "Customer" "Enter and maintain customer data" HELP 101
+	    CALL customer()
+	    CALL ring_menu()
+	COMMAND "Orders" "Enter and maintain orders" HELP 102
+	    CALL orders()
+	    CALL ring_menu()
+	COMMAND "Stock" "Enter and maintain stock list" HELP 103
+	    CALL stock()
+	    CALL ring_menu()
+
+
+	COMMAND "Reports" "Print reports and mailing labels" HELP 104
+	    CALL reports()
+	    CALL ring_menu()
+	COMMAND key("!")
+	    CALL bang()
+	    CALL ring_menu()
+	    NEXT OPTION "Customer"
+        COMMAND key("X")
+	    CALL demo()
+	    CALL ring_menu()
+	    NEXT OPTION "Customer"
+	COMMAND "Exit" "Exit program and return to operating system" HELP 105
+	    CLEAR SCREEN
+	    EXIT PROGRAM
+    END MENU
+
+.2002
+The following is the INFORMIX-4GL source code for mailing-label selection and
+printing.  The CONSTRUCT statement manages the query-by-example input and
+builds the corresponding SQL where-clause.
+
+    CONSTRUCT BY NAME where_part ON customer.*
+    LET query_text = "select * from customer where ", where_part CLIPPED,
+	     " order by zipcode"
+    PREPARE mail_query FROM query_text
+    DECLARE label_list CURSOR FOR mail_query
+    PROMPT "Enter file name for labels >" FOR file_name
+    MESSAGE "Printing mailing labels to ", file_name CLIPPED," -- Please wait"
+
+    START REPORT labels_report TO file_name
+    FOREACH label_list INTO p_customer.*
+        OUTPUT TO REPORT labels_report (p_customer.*)
+    END FOREACH
+    FINISH REPORT labels_report
+
+See the source code option REPORT for the corresponding report routine.
+.2003
+The following is the INFORMIX-4GL source code for order entry using scrolled
+input fields.  Only the INPUT ARRAY statement is needed to utilize the full
+scrolling features.  Some additional code has been added merely to customize
+the array processing to this application.
+
+    DISPLAY "Press ESC to write order" AT 1,1
+    INPUT ARRAY p_items FROM s_items.* HELP 311
+        BEFORE FIELD stock_num
+	    MESSAGE "Enter a stock number."
+        BEFORE FIELD manu_code
+            MESSAGE "Enter the code for a manufacturer."
+        AFTER FIELD stock_num, manu_code
+            LET pa = arr_curr()
+	    LET sc = scr_line()
+            SELECT description, unit_price
+                INTO p_items[pa].description,
+                     p_items[pa].unit_price
+                FROM stock
+		WHERE stock_num = p_items[pa].stock_num AND
+		      stock_manu = p_items[pa].menu_code
+            DISPLAY p_items[pa].description, p_items[pa].unit_price
+		TO stock[sc].*
+            CALL item_total()
+        AFTER FIELD quantity
+            CALL item_total()
+	AFTER INSERT, DELETE, ROW
+	    CALL order_total()
+    END INPUT
+
+See the source code option QUERY-LANGUAGE for the SQL statements that
+insert the order information into the database.
+.2004
+The following is the INFORMIX-4GL source code that uses SQL to insert the
+entered order information into the database.  Note that the use of
+transactions ensures that database integrity is maintained, even if an
+intermediate operation fails.
+
+    BEGIN WORK
+    LET p_orders.order_num = 0
+    INSERT INTO orders VALUES (p_orders.*)
+    IF status < 0 THEN
+	ROLLBACK WORK
+	MESSAGE "Unable to complete update of orders table"
+	RETURN
+    END IF
+    LET p_orders.order_num = SQLCA.SQLERRD[2]
+    DISPLAY BY NAME p_orders.order_num 
+    FOR i = 1 to arr_count()
+        INSERT INTO items
+            VALUES (p_items[counter].item_num, p_orders.order_num,
+                p_items[counter].stock_num,    p_items[counter].manu_code,
+                p_items[counter].quantity,     p_items[counter].total_price)
+        IF status < 0 THEN
+	    ROLLBACK WORK
+	    Message "Unable to insert items"
+	    RETURN FALSE
+        END IF
+    END FOR
+    COMMIT WORK
+.2005
+The following is the INFORMIX-4GL source code that generates the mailing-label
+report.  See the source code option CONSTRUCT for the report calling sequence.
+
+    REPORT labels_report (rl)
+        DEFINE rl RECORD LIKE customer.*
+        OUTPUT
+            TOP MARGIN 0
+            PAGE LENGTH 6
+        FORMAT
+            ON EVERY ROW
+                SKIP TO TOP OF PAGE
+                PRINT rl.fname CLIPPED, 1 SPACE, rl.lname
+                PRINT rl.company
+                PRINT rl.address1
+                IF rl.address2 IS NOT NULL THEN
+                    PRINT rl.address2
+                END IF
+                PRINT rl.city CLIPPED, ", ", rl.state, 2 SPACES, rl.zipcode
+    END REPORT
+.2006
+The following is the INFORMIX-4GL source code that manages a simple form
+for data entry.  Note the use of special key definitions during data entry.
+
+    OPEN FORM cust_form FROM "customer"
+    DISPLAY FORM cust_form
+
+    MESSAGE "Press F1 or CTRL-F for field help;",
+	    "F2 or CTRL-Y to return to CUSTOMER Menu"
+    DISPLAY "Press ESC to enter new customer data or DEL to abort entry"
+    INPUT BY NAME p_customer.*
+	AFTER FIELD state
+	    CALL statehelp()
+	ON KEY (F1, CONTROL-F)
+            CALL customer_help()
+	ON KEY (F2, CONTROL-Y)
+            CLEAR FORM
+            RETURN
+    END INPUT
+.2007
+The following is the INFORMIX-4GL source code that opens a window in the
+customer entry screen, displays the list of valid state names and codes, saves 
+the index into the p_state array for the selected state, closes the window, and
+returns the index to the calling routine.
+
+    OPEN WINDOW w_state AT 8,40
+        WITH FORM "state_list"
+        ATTRIBUTE (BORDER, RED, FORM LINE 2)
+
+    CALL set_count(state_cnt)
+    DISPLAY ARRAY p_state TO s_state.*
+    LET idx = arr_curr()
+
+    CLOSE WINDOW w_state
+    RETURN (idx)
+.2008
+The following is the INFORMIX-4GL source code that allows the user to browse
+through the rows returned by a "scroll" cursor.
+
+    DECLARE customer_set SCROLL CURSOR FOR
+	SELECT * FROM customer
+	    ORDER BY lname
+    OPEN customer_set
+    FETCH FIRST customer_set INTO p_customer.*
+    IF status = NOTFOUND THEN
+	LET exist = FALSE
+    ELSE
+        LET exist = TRUE
+	DISPLAY BY NAME p_customer.*
+	MENU "BROWSE"
+	    COMMAND "Next" "View the next customer in the list"
+		FETCH NEXT customer_set INTO p_customer.*
+		IF status = NOTFOUND THEN
+		    ERROR "No more customers in this direction" 
+		    FETCH LAST customer_set INTO p_customer.*
+		END IF
+		DISPLAY BY NAME p_customer.*  
+	    COMMAND "Previous" "View the previous customer in the list"
+		FETCH PREVIOUS customer_set INTO p_customer.*
+		IF status = NOTFOUND THEN
+		    ERROR "No more customers in this direction" 
+		    FETCH FIRST customer_set INTO p_customer.*
+		END IF
+		DISPLAY BY NAME p_customer.*  
+	    COMMAND "First" "View the first customer in the list"
+		FETCH FIRST customer_set INTO p_customer.*
+		DISPLAY BY NAME p_customer.*  
+	    COMMAND "Last" "View the last customer in the list"
+		FETCH LAST customer_set INTO p_customer.*
+		DISPLAY BY NAME p_customer.*  
+	    COMMAND "Select" "Exit BROWSE selecting the current customer"
+		LET chosen = TRUE
+		EXIT MENU
+	    COMMAND "Quit" "Quit BROWSE without selecting a customer"
+		LET chosen = FALSE
+		EXIT MENU
+	END MENU
+    END IF
+    CLOSE customer_set
+

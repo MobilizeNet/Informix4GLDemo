@@ -1,0 +1,14 @@
+customer|city|1|0|n|n|n|n|||
+orders|order_num|2|4|n|n|n|n|||
+orders|order_date|3|4|n|n|n|n|||
+orders|po_num|4|4|n|n|n|n|||
+items|item_num|5|6|n|n|n|n|||
+items|order_num|6|4|n|n|n|n|||
+items|stock_num|7|4|n|n|n|n|||
+items|manu_code|8|4|n|n|n|n|||
+items|quantity|9|4|n|n|n|n|||
+items|total_price|10|4|n|n|n|n||<500|
+stock|description|11|4|n|n|n|n|||
+orders|ship_instruct|12|4|n|n|n|n|||
+stock|unit_price|13|4|n|n|n|n|||
+items|total_price|14|5|y|n|n|n||>=500|

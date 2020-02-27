@@ -1,0 +1,23 @@
+DATABASE stores7
+
+SCREEN
+{
+   Manufacturer      Description     Unit  Unit Price
+
+[f001           ] [f002           ] [f003] [f004     ] 
+[f001           ] [f002           ] [f003] [f004     ]
+[f001           ] [f002           ] [f003] [f004     ]
+}
+
+TABLES
+stock
+manufact
+
+ATTRIBUTES
+f001 = manufact.manu_name;
+f002 = stock.description;
+f003 = stock.unit;
+f004 = stock.unit_price;
+
+INSTRUCTIONS
+SCREEN RECORD s_stock[3] (manu_name THRU unit_price)

@@ -1,0 +1,29 @@
+database stores7
+
+screen
+{
+    			CUSTOMER FORM 
+
+    Number:  [f000       ]
+First Name:  [f001           ]   Last Name:  [f002           ]
+   Company:  [f003                ]  
+   Address:  [f004                ] [f005                ]
+      City:  [f006           ]   State:  [a0]    Zip:  [f007 ]
+     Phone:  [f008              ]
+}
+
+tables
+customer
+
+attributes
+f000 = customer.customer_num;
+f001 = customer.fname;
+f002 = customer.lname;
+f003 = customer.company;
+f004 = customer.address1;
+f005 = customer.address2;
+f006 = customer.city;
+a0 = customer.state;
+f007 = customer.zipcode;
+f008 = customer.phone;
+

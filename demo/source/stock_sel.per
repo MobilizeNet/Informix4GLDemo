@@ -1,0 +1,24 @@
+DATABASE stores7
+
+SCREEN
+{
+  [f018][f019][f020           ][f021           ][f022     ][f023           ]
+  [f018][f019][f020           ][f021           ][f022     ][f023           ]
+  [f018][f019][f020           ][f021           ][f022     ][f023           ]
+}
+
+TABLES
+stock
+
+ATTRIBUTES
+f018 = FORMONLY.stock_num;
+f019 = FORMONLY.manu_code;
+f020 = FORMONLY.manu_name;
+f021 = FORMONLY.description;
+f022 = FORMONLY.unit_price;
+f023 = FORMONLY.unit_descr;
+
+INSTRUCTIONS
+DELIMITERS "  "
+SCREEN RECORD s_stock[3] (FORMONLY.stock_num THRU FORMONLY.unit_descr)
+                          

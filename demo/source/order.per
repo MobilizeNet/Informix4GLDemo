@@ -1,0 +1,61 @@
+DATABASE stores7
+
+SCREEN
+{
+
+                              ORDER FORM
+-----------------------------------------------------------------------------
+                  Customer Number:  [f000       ]
+
+   First Name:  [f001           ]    Last Name:  [f002           ]
+      Address:  [f003                ]
+                [f004                ]
+         City:  [f005           ]    State:  [a0]    Zip:  [f006 ]
+    Telephone:  [f007              ]
+-----------------------------------------------------------------------------
+ Order No: [f008       ]   Order Date: [f009      ]   Ship Date: [f010      ] 
+
+Item No.  Stock No.  Code    Description    Quantity    Price       Total
+
+[f011  ]  [f012  ]  [a1 ] [f013           ] [f014  ] [f015     ] [f016       ]
+[f011  ]  [f012  ]  [a1 ] [f013           ] [f014  ] [f015     ] [f016       ]
+[f011  ]  [f012  ]  [a1 ] [f013           ] [f014  ] [f015     ] [f016       ]
+[f011  ]  [f012  ]  [a1 ] [f013           ] [f014  ] [f015     ] [f016       ]
+-----------------------------------------------------------------------------
+}
+END
+
+TABLES
+customer
+orders
+items
+stock
+
+ATTRIBUTES
+f000 = customer.customer_num; 
+f001 = customer.fname;
+f002 = customer.lname;
+f003 = customer.address1;
+f004 = customer.address2;
+f005 = customer.city;
+a0 = customer.state;
+f006 = customer.zipcode;
+f007 = customer.phone;
+
+f008 = orders.order_num;
+f009 = orders.order_date;
+f010 = orders.ship_date;
+
+f011 = items.item_num, NOENTRY;
+f012 = items.stock_num;
+a1 = items.manu_code;
+f013 = stock.description, NOENTRY;
+f014 = items.quantity;
+f015 = stock.unit_price, NOENTRY;
+f016 = items.total_price, NOENTRY;
+END
+
+INSTRUCTIONS
+SCREEN RECORD s_items[4] (item_num, stock_num, manu_code, description, 
+	quantity, unit_price, total_price)
+END

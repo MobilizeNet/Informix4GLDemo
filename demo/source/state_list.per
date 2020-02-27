@@ -1,0 +1,26 @@
+DATABASE stores7
+
+SCREEN
+{
+   State Selection
+
+[a0] [f000           ]
+[a0] [f000           ]
+[a0] [f000           ]
+[a0] [f000           ]
+[a0] [f000           ]
+[a0] [f000           ]
+[a0] [f000           ]
+}
+
+TABLES
+state
+
+ATTRIBUTES
+a0 = state.code;
+f000 = state.sname;
+
+INSTRUCTIONS
+DELIMITERS "  "
+SCREEN RECORD s_state[7](state.*)
+

@@ -1,0 +1,58 @@
+DATABASE stores7
+
+SCREEN
+{
+ ------------------------------------------------------------------------------
+                              ORDER FORM
+ ------------------------------------------------------------------------------
+ Customer Number:[f000       ]  Contact Name:[f001           ][f002           ]
+    Company Name:[f003                ]
+         Address:[f004                ][f005                ]
+            City:[f006           ] State:[a0] Zip Code:[f007 ]
+       Telephone:[f008              ]
+ ------------------------------------------------------------------------------
+ Order No:[f009       ]    Order Date:[f010      ]    PO Number:[f011      ]
+        Shipping Instructions:[f012                                    ]
+ ------------------------------------------------------------------------------
+ Item No.  Stock No.  Code    Description    Quantity    Price       Total
+ [f013  ]  [f014  ]  [a1 ] [f015           ] [f016  ] [f017     ] [f018       ]
+ [f013  ]  [f014  ]  [a1 ] [f015           ] [f016  ] [f017     ] [f018       ]
+ [f013  ]  [f014  ]  [a1 ] [f015           ] [f016  ] [f017     ] [f018       ]
+ [f013  ]  [f014  ]  [a1 ] [f015           ] [f016  ] [f017     ] [f018       ]
+                 Running Total including Tax and Shipping Charges:[f019       ]
+ ==============================================================================
+}
+
+TABLES
+customer orders items stock
+
+ATTRIBUTES
+f000 = customer.customer_num; 
+f001 = customer.fname;
+f002 = customer.lname;
+f003 = customer.company;
+f004 = customer.address1;
+f005 = customer.address2;
+f006 = customer.city;
+a0 = customer.state, UPSHIFT;
+f007 = customer.zipcode;
+f008 = customer.phone, PICTURE = "###-###-#### XXXXX";
+
+f009 = orders.order_num;
+f010 = orders.order_date, DEFAULT = TODAY;
+f011 = orders.po_num;
+f012 = orders.ship_instruct;
+
+f013 = items.item_num, NOENTRY;
+f014 = items.stock_num;
+a1 = items.manu_code, UPSHIFT;
+f015 = stock.description, NOENTRY;
+f016 = items.quantity;
+f017 = stock.unit_price, NOENTRY;
+f018 = items.total_price, NOENTRY;
+f019 = formonly.t_price TYPE MONEY;
+
+INSTRUCTIONS
+SCREEN RECORD s_items[4](items.item_num, items.stock_num, items.manu_code,
+        stock.description, items.quantity, stock.unit_price, items.total_price)
+
