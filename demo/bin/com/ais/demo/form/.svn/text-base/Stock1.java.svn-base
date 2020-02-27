@@ -1,0 +1,105 @@
+package com.ais.demo.form;
+// Import declaration block
+import com.ais.fc.ix.lang.*;
+import com.ais.fc.ix.lang.blob.*;
+import com.ais.fc.ix.swing.ui.*;
+import javax.swing.*;
+import java.awt.*;
+
+public  class Stock1 extends Form{
+  //*** Form Component Declaration ***
+  JLabel label_0 = new JLabel();
+  JLabel label_1 = new JLabel();
+  JLabel label_2 = new JLabel();
+  JLabel label_3 = new JLabel();
+  FieldGroup manufact__manu_name = new FieldGroup();
+  TextBox manufact__manu_name__fld = new TextBox();
+  FieldGroup stock__description = new FieldGroup();
+  TextBox stock__description__fld = new TextBox();
+  FieldGroup stock__unit = new FieldGroup();
+  TextBox stock__unit__fld = new TextBox();
+  FieldGroup stock__unit_price = new FieldGroup();
+  TextBox stock__unit_price__fld = new TextBox();
+  //*** Table Screen Record Declaration ***
+  ScreenRecord stock = new ScreenRecord();
+  ScreenRecord manufact = new ScreenRecord();
+  //*** Screen Record Declaration ***
+  ScreenRecord s_stock = new ScreenRecord();
+  public Stock1(){
+    try {
+      jbInit();
+    }
+    catch (Exception e){
+    }
+  }
+  
+
+  private void jbInit() throws Exception{
+    //*** Screen Specification ***
+    this.setName("stock1");
+    GridBagLayout layout = new GridBagLayout();
+    this.setLayout(layout);
+    this.setSize(GridBagLayoutHelper.computeSize(layout, this, 54, 6));
+    //*** Component Initialization ***
+    label_0.setName("label_0");
+    label_0.setText("Manufacturer");
+    this.add(label_0, new GridBagConstraints(3, 0, 12, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    label_1.setName("label_1");
+    label_1.setText("Description");
+    this.add(label_1, new GridBagConstraints(21, 0, 11, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    label_2.setName("label_2");
+    label_2.setText("Unit");
+    this.add(label_2, new GridBagConstraints(37, 0, 4, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    label_3.setName("label_3");
+    label_3.setText("Unit Price");
+    this.add(label_3, new GridBagConstraints(43, 0, 10, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    manufact__manu_name.setName("manu_name");
+    manufact__manu_name__fld.setName("manu_name");
+    manufact__manu_name__fld.setType(new Char(15));
+    manufact__manu_name__fld.setDefaultValue(null);
+    manufact__manu_name__fld.setEnabled(false);
+    manufact__manu_name__fld.setLength(15);
+    manufact__manu_name.add(manufact__manu_name__fld);
+    manufact__manu_name.setFieldCount(3);
+    this.add(manufact__manu_name, new GridBagConstraints(1, 2, 15, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    stock__description.setName("description");
+    stock__description__fld.setName("description");
+    stock__description__fld.setType(new Char(15));
+    stock__description__fld.setDefaultValue(null);
+    stock__description__fld.setEnabled(false);
+    stock__description__fld.setLength(15);
+    stock__description.add(stock__description__fld);
+    stock__description.setFieldCount(3);
+    this.add(stock__description, new GridBagConstraints(19, 2, 15, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    stock__unit.setName("unit");
+    stock__unit__fld.setName("unit");
+    stock__unit__fld.setType(new Char(4));
+    stock__unit__fld.setDefaultValue(null);
+    stock__unit__fld.setEnabled(false);
+    stock__unit__fld.setLength(4);
+    stock__unit.add(stock__unit__fld);
+    stock__unit.setFieldCount(3);
+    this.add(stock__unit, new GridBagConstraints(37, 2, 4, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    stock__unit_price.setName("unit_price");
+    stock__unit_price__fld.setName("unit_price");
+    stock__unit_price__fld.setType(new Money(6, 2));
+    stock__unit_price__fld.setDefaultValue(null);
+    stock__unit_price__fld.setEnabled(false);
+    stock__unit_price__fld.setLength(9);
+    stock__unit_price.add(stock__unit_price__fld);
+    stock__unit_price.setFieldCount(3);
+    this.add(stock__unit_price, new GridBagConstraints(44, 2, 9, 3, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+    //*** Table Screen Record Initialization ***
+    stock.setName("stock");
+    stock.setFields(stock__description, stock__unit, stock__unit_price);
+    this.addElement(stock);
+    manufact.setName("manufact");
+    manufact.setFields(manufact__manu_name);
+    this.addElement(manufact);
+    //*** Screen Record Initialization ***
+    s_stock.setName("s_stock");
+    s_stock.setFields(manufact__manu_name, stock__description, stock__unit, stock__unit_price);
+    this.addElement(s_stock);
+  }
+
+}

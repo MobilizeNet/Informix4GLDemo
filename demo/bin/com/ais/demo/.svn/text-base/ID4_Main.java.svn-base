@@ -1,0 +1,26 @@
+package com.ais.demo;
+// Import declaration block
+
+public  interface ID4_Main extends Runnable{
+
+  void bang();
+  
+
+  void mess(String str_, short mrow);
+  
+
+  void ring_menu();
+  
+
+  void unring_menu();
+  
+
+  void clear_menu();
+  
+
+  void get_states();
+  
+
+  void get_stocks();
+
+}

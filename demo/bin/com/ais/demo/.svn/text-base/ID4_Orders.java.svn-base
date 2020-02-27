@@ -1,0 +1,47 @@
+package com.ais.demo;
+// Import declaration block
+
+public  interface ID4_Orders {
+
+  void orders();
+  
+
+  void add_order();
+  
+
+  void update_order();
+  
+
+  void delete_order();
+  
+
+  void order_total();
+  
+
+  void item_total();
+  
+
+  void renum_items();
+  
+
+  boolean insert_items();
+  
+
+  Object[] get_stock();
+  
+
+  void get_order();
+  
+
+  void get_item();
+  
+
+  void invoice(String file_name_);
+  
+
+  void finishReportR_Invoice();
+  
+
+  void outputReportR_Invoice(Object... row);
+
+}

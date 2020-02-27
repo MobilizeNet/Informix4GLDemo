@@ -1,0 +1,6 @@
+package com.ais.demo;
+// Import declaration block
+
+public interface ID4_Globals {
+
+}

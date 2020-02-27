@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/ais-ifx2java/!svn/ver/4972/trunk/demo/target/java/src/com/ais/demo/record
+END
+P_Items.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ais-ifx2java/!svn/ver/4972/trunk/demo/target/java/src/com/ais/demo/record/P_Items.java
+END
+R.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/ais-ifx2java/!svn/ver/4972/trunk/demo/target/java/src/com/ais/demo/record/R.java
+END
+P_Stock.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/ais-ifx2java/!svn/ver/4972/trunk/demo/target/java/src/com/ais/demo/record/P_Stock.java
+END
+SQLCA.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/ais-ifx2java/!svn/ver/4972/trunk/demo/target/java/src/com/ais/demo/record/SQLCA.java
+END
+X_Invoice.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/ais-ifx2java/!svn/ver/4972/trunk/demo/target/java/src/com/ais/demo/record/X_Invoice.java
+END
+P_Orders.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/ais-ifx2java/!svn/ver/4972/trunk/demo/target/java/src/com/ais/demo/record/P_Orders.java
+END

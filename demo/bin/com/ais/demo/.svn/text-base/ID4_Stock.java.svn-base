@@ -1,0 +1,20 @@
+package com.ais.demo;
+// Import declaration block
+
+public  interface ID4_Stock {
+
+  void stock();
+  
+
+  void add_stock();
+  
+
+  void query_stock();
+  
+
+  void update_stock();
+  
+
+  void delete_stock();
+
+}

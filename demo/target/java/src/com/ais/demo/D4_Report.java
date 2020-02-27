@@ -1,0 +1,541 @@
+package com.ais.demo;
+// Import declaration block
+import com.ais.demo.record.R;
+import com.ais.demo.record.stores7.informix.Customer;
+import com.ais.fc.ix.ui.*;
+import com.ais.fc.ix.input.*;
+import com.ais.fc.ix.input.event.*;
+import com.ais.fc.ix.lang.*;
+import com.ais.fc.ix.lang.blob.*;
+import com.ais.fc.ix.application.*;
+import com.ais.fc.ix.ui.UIHelper;
+import com.ais.fc.ix.ui.Key;
+import com.ais.fc.ix.report.*;
+import com.ais.fc.ix.sql.*;
+import java.awt.event.KeyEvent;
+
+public  class D4_Report implements ID4_Report {
+  /**
+   *  D4_Report constructor
+   */
+  public D4_Report(Application owner){
+    _app = owner;
+    _wm = _app.getUIHelper();
+    _eh = _app.getErrorHandler();
+    //Initialization for the global instances
+    globals_0 = (D4_Globals)_app.getModule("com.ais.demo.D4_Globals");
+  }
+  
+  /**
+   *  Application instances
+   */
+  protected Application _app;
+  protected UIHelper _wm;
+  protected ErrorHandler _eh;
+  protected D4_Globals globals_0 = null;
+
+  public void reports(){
+    getD4_Main().ring_menu();
+    {
+      final Menu menu = _wm.createMenu("REPORTS");
+      menu.addCommandListener(_wm.createCommand("Labels", "Print mailing labels from customer list", 501), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          getD4_Main().unring_menu();
+          print_labels();
+          _wm.setCurrent(_wm.getScreen());
+          _wm.getScreen().clear();
+          getD4_Main().ring_menu();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Accounts-receivable", "Print current unpaid orders", 502), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          getD4_Main().unring_menu();
+          print_ar();
+          _wm.setCurrent(_wm.getScreen());
+          _wm.getScreen().clear();
+          getD4_Main().ring_menu();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Backlog", "Print backlogged orders", 503), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          getD4_Main().unring_menu();
+          print_backlog();
+          getD4_Main().ring_menu();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Stock-list", "Print stock available", 504), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          getD4_Main().unring_menu();
+          print_stock();
+          getD4_Main().ring_menu();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Options", "Change the report output options", 505), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          getD4_Main().unring_menu();
+          update_options();
+          getD4_Main().ring_menu();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Exit", "Return to MAIN Menu", 506), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          _wm.setCurrent(_wm.getScreen());
+          _wm.getScreen().clear();
+          menu.stop();
+        }
+      });
+      menu.start();
+    }
+  }
+  
+
+  public void print_labels(){
+    Char where_part = new Char(500);
+    Char query_text = new Char(500);
+    Char msg = new Char(50);
+    Char file_name = new Char(20);
+    java.sql.ResultSet label_list = null;
+    java.sql.PreparedStatement label_st = null;
+    try {
+      _wm.setFormLine(6);
+      _app.putProperty("form.customer", "com.ais.demo.form.Custform");
+      /**
+       *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+       */
+      Warning.warning("** W0146 **: Attribute COLOR(MAGENTA) not translated. Used by: Display form");
+      _wm.getCurrentWindow().add(_app.getProperty("form.customer"), com.ais.fc.ix.ui.Window.FORM_CONSTRAINT);
+      /**
+       *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+       */
+      Warning.warning("** W0148 **: Draw box statement not supported. fgl_drawbox(3,32,3,42)");
+      /**
+       *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+       */
+      Warning.warning("** W0148 **: Draw box statement not supported. fgl_drawbox(3,61,8,7)");
+      /**
+       *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+       */
+      Warning.warning("** W0148 **: Draw box statement not supported. fgl_drawbox(11,61,8,7)");
+      getD4_Main().clear_menu();
+      _wm.displayAt(0, 0, "CUSTOMER LABELS:");
+      _wm.message("Use query-by-example to select customer list");
+      {
+        final Construct construct = _wm.createConstruct(new String[]{"customer.customer_num", "customer.fname", "customer.lname", "customer.company", "customer.address1", "customer.address2", "customer.city", "customer.state", "customer.zipcode", "customer.phone"}, _wm.getFldRef("customer_num"), _wm.getFldRef("fname"), _wm.getFldRef("lname"), _wm.getFldRef("company"), _wm.getFldRef("address1"), _wm.getFldRef("address2"), _wm.getFldRef("city"), _wm.getFldRef("state"), _wm.getFldRef("zipcode"), _wm.getFldRef("phone"));
+        construct.start();
+        where_part.set(construct.getQuery());
+      }
+      if (_wm.isInterruptFlag()){
+        _wm.setInterruptFlag(false);
+        /**
+         *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+         */
+        Warning.warning("** W0146 **: Attribute COLOR(RED), REVERSE not translated. Used by: Display");
+        _wm.error("Label print request aborted");
+        return ;
+      }
+      _wm.message("");
+      query_text.set("select * from customer where " + where_part.rTrim() + " order by zipcode");
+      label_st = _app.getDB().prepareStatement(Str.valueOf(query_text));
+      if (Str.equals(Str.valueOf(globals_0.print_option), "f")){
+        {
+          final Prompt prompt = _wm.createPrompt(" Enter file name for labels >", false);
+          prompt.start();
+          file_name.set(prompt.getPrompt());
+        }
+        if (file_name.isNull()){
+          file_name.set("labels.out");
+        }
+        _wm.message("Printing mailing labels to ", file_name.rTrim(), " -- Please wait");
+        /**
+         *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+         */
+        Warning.warning("** W0108 **: The use of report-to-file must be reviewed.");
+        {
+          Report _rep = (Report)createReportLabels_Report();
+          _rep.setOutputToFile(Str.valueOf(file_name));
+          _rep.start();
+        }
+      }
+      else if (Str.equals(Str.valueOf(globals_0.print_option), "p")){
+        _wm.message("Printing mailing labels -- Please wait");
+        {
+          Report _rep = (Report)createReportLabels_Report();
+          _rep.setOutputToPrinter();
+          _rep.start();
+        }
+      }
+      else if (Str.equals(Str.valueOf(globals_0.print_option), "s")){
+        ((Report)createReportLabels_Report()).start();
+        _wm.setCurrent(_wm.getScreen());
+        _wm.getScreen().clear();
+      }
+      label_list = _app.getDB().executeQuery(label_st);
+      foreach_ : 
+      while (_app.getDB().moveNext(label_list)){
+        {
+          Record _rec = new Record(label_list);
+          try {
+            globals_0.p_customer.set(_rec);
+          }
+          catch (NoMoreValuesException _e){
+          }
+        }
+        outputReportLabels_Report(globals_0.p_customer.toArray());
+        if (_wm.isInterruptFlag()){
+          _wm.setInterruptFlag(false);
+          _eh.setStatus(0);
+          break foreach_;
+        }
+      }
+      _app.getDB().close(label_list);
+      label_list = null;
+      finishReportLabels_Report();
+      if (_wm.isInterruptFlag()){
+        _wm.setInterruptFlag(false);
+        /**
+         *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+         */
+        Warning.warning("** W0146 **: Attribute COLOR(RED), REVERSE not translated. Used by: Display");
+        _wm.error("Label printing aborted");
+        return ;
+      }
+      if (Str.equals(Str.valueOf(globals_0.print_option), "f")){
+        msg.set("Labels printed to " + file_name.rTrim());
+        getD4_Main().mess(msg.stringValue(), (short)23);
+      }
+      _app.putProperty("form.customer", null);
+      _wm.setFormLine(2);
+    }
+    finally {
+      DBHelper _db = _app.getDB();
+      if (_db != null){
+        _db.close(label_list);
+        label_list = null;
+        _db.close(label_st);
+        label_st = null;
+      }
+    }
+  }
+  
+  private ReportLabels_Report labels_report;
+
+  public Report createReportLabels_Report(){
+    if (labels_report == null){
+      labels_report = new ReportLabels_Report();
+    }
+    return labels_report;
+  }
+  
+
+  public void finishReportLabels_Report(){
+    labels_report.execute();
+    labels_report = null;
+  }
+  
+
+  public void outputReportLabels_Report(Object... row){
+    labels_report.outputTo(new Record(row));
+  }
+  
+  class ReportLabels_Report extends Report{
+    //Declaration LIKE customer
+    Customer rl = new Customer();
+    public ReportLabels_Report(){
+      super(_eh, _app.getReportOutputFactory());
+      setReportTabSize(Int.valueOf(_app.getProperty("application.report.tabsize")));
+      setFieldNames("rl_customer_num", "rl_fname", "rl_lname", "rl_company", "rl_address1", "rl_address2", "rl_city", "rl_state", "rl_zipcode", "rl_phone");
+      setTopMargin(0);
+      setBottomMargin(0);
+      setPageLength(6);
+    }
+    
+
+    public void onParamLoad(Record row){
+      rl.set(row);
+    }
+    
+
+    public void onEveryRow(){
+      skipToNewPage();
+      println(rl.fname.rTrim(), Str.spaces(1), rl.lname);
+      println(rl.company);
+      println(rl.address1);
+      if (!rl.address2.isNull()){
+        println(rl.address2);
+      }
+      println(rl.city.rTrim(), ", ", rl.state, Str.spaces(2), rl.zipcode);
+      if (Str.equals(Str.valueOf(globals_0.print_option), "s")){
+        /**
+         *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+         */
+        Warning.warning("** W0123 **: PAUSE statement not translated.");
+      }
+    }
+
+  }
+  
+
+  public void print_ar(){
+    R r = new R();
+    Char file_name = new Char(20);
+    Char msg = new Char(50);
+    java.sql.ResultSet ar_list = null;
+    java.sql.PreparedStatement ar_list__p = null;
+    try {
+      ar_list__p = _app.getDB().prepareStatement("SELECT customer.customer_num, fname, lname, company, orders.order_num, order_date, ship_date, paid_date, total_price FROM customer, orders, items WHERE (customer.customer_num = orders.customer_num AND paid_date IS NULL AND orders.order_num = items.order_num) ORDER BY 1, 5");
+      getD4_Main().clear_menu();
+      if (Str.equals(Str.valueOf(globals_0.print_option), "f")){
+        {
+          final Prompt prompt = _wm.createPrompt(" Enter file name for AR Report >", false);
+          prompt.start();
+          file_name.set(prompt.getPrompt());
+        }
+        if (file_name.isNull()){
+          file_name.set("ar.out");
+        }
+        _wm.message("Printing AR REPORT to ", file_name.rTrim(), " -- Please wait");
+        /**
+         *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+         */
+        Warning.warning("** W0108 **: The use of report-to-file must be reviewed.");
+        {
+          Report _rep = (Report)createReportAr_Report();
+          _rep.setOutputToFile(Str.valueOf(file_name));
+          _rep.start();
+        }
+      }
+      else if (Str.equals(Str.valueOf(globals_0.print_option), "p")){
+        _wm.message("Printing AR REPORT -- Please wait");
+        {
+          Report _rep = (Report)createReportAr_Report();
+          _rep.setOutputToPrinter();
+          _rep.start();
+        }
+      }
+      else if (Str.equals(Str.valueOf(globals_0.print_option), "s")){
+        ((Report)createReportAr_Report()).start();
+        _wm.setCurrent(_wm.getScreen());
+        _wm.getScreen().clear();
+        _wm.message("Printing AR REPORT -- Please wait");
+      }
+      ar_list = _app.getDB().executeQuery(ar_list__p);
+      foreach_ : 
+      while (_app.getDB().moveNext(ar_list)){
+        {
+          Record _rec = new Record(ar_list);
+          try {
+            r.set(_rec);
+          }
+          catch (NoMoreValuesException _e){
+          }
+        }
+        outputReportAr_Report(r.toArray());
+        if (_wm.isInterruptFlag()){
+          _wm.setInterruptFlag(false);
+          _eh.setStatus(0);
+          break foreach_;
+        }
+      }
+      _app.getDB().close(ar_list);
+      ar_list = null;
+      finishReportAr_Report();
+      if (_wm.isInterruptFlag()){
+        _wm.setInterruptFlag(false);
+        /**
+         *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+         */
+        Warning.warning("** W0146 **: Attribute COLOR(RED), REVERSE not translated. Used by: Display");
+        _wm.error("AR REPORT printing aborted");
+        return ;
+      }
+      if (Str.equals(Str.valueOf(globals_0.print_option), "f")){
+        msg.set("AR REPORT printed to " + file_name.rTrim());
+        getD4_Main().mess(msg.stringValue(), (short)23);
+      }
+    }
+    finally {
+      DBHelper _db = _app.getDB();
+      if (_db != null){
+        _db.close(ar_list);
+        ar_list = null;
+        _db.close(ar_list__p);
+        ar_list__p = null;
+      }
+    }
+  }
+  
+  private ReportAr_Report ar_report;
+
+  public Report createReportAr_Report(){
+    if (ar_report == null){
+      ar_report = new ReportAr_Report();
+    }
+    return ar_report;
+  }
+  
+
+  public void finishReportAr_Report(){
+    ar_report.execute();
+    ar_report = null;
+  }
+  
+
+  public void outputReportAr_Report(Object... row){
+    ar_report.outputTo(new Record(row));
+  }
+  
+  class ReportAr_Report extends Report{
+    R r = new R();
+    Char name_text = new Char(80);
+    //Aggregate functions declarations
+    SumFunction rptSum_000;
+    SumFunction rptSum_001;
+    public ReportAr_Report(){
+      super(_eh, _app.getReportOutputFactory());
+      setReportTabSize(Int.valueOf(_app.getProperty("application.report.tabsize")));
+      setFieldNames("r_customer_num", "r_fname", "r_lname", "r_company", "r_order_num", "r_order_date", "r_ship_date", "r_paid_date", "r_total_price");
+      setGroupHierarchy(new String[]{"r_customer_num", "r_order_num"}, new boolean[]{false, false});
+      setUsedGroups("r_customer_num", "r_order_num", "r_customer_num");
+      setPageLength(22);
+      setLeftMargin(0);
+      setHeaderLines(7);
+      //Aggregate functions initializations
+      //SUM aggregate function
+      rptSum_000 = new SumFunction() {
+        public Decimal getValue(){
+          return r.total_price;
+        }
+      };
+      addReportFunction("r_order_num", rptSum_000);
+      //SUM aggregate function
+      rptSum_001 = new SumFunction() {
+        public Decimal getValue(){
+          return r.total_price;
+        }
+      };
+      addReportFunction("r_customer_num", rptSum_001);
+    }
+    
+
+    public void onParamLoad(Record row){
+      r.set(row);
+    }
+    
+
+    public void onPageHeader(){
+      println(Str.spaces(15), "West Coast Wholesalers, Inc.");
+      println(Str.spaces(6), "Statement of ACCOUNTS RECEIVABLE - ", Date.getSystemDate().format("mmm dd, yyyy"));
+      skipLines(1);
+      name_text.set(r.fname.rTrim() + " " + r.lname.rTrim() + "/" + r.company.rTrim());
+      println(Str.spaces(Int.valueOf(29d - Dbl.valueOf(name_text.length()) / 2d)), name_text);
+      skipLines(1);
+      println(" Order Date   Order Number    Ship Date            Amount");
+      println("----------------------------------------------------------");
+    }
+    
+
+    public void onPageTrailer(){
+      if (Str.equals(Str.valueOf(globals_0.print_option), "s")){
+        /**
+         *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+         */
+        Warning.warning("** W0123 **: PAUSE statement not translated.");
+      }
+    }
+    
+
+    public void onBeforeGroup(String groupName){
+      if (groupName.equals("r_customer_num")){
+        skipToNewPage();
+      }
+    }
+    
+
+    public void onAfterGroup(String groupName){
+      if (groupName.equals("r_order_num")){
+        needLines(3);
+        println(" ", r.order_date, Str.spaces(7), Int.format(r.order_num, "###&"), Str.spaces(8), r.ship_date, "  ", rptSum_000.getSum().format("$$$$,$$$,$$$.&&"));
+      }
+      else if (groupName.equals("r_customer_num")){
+        println(Str.spaces(42), "----------------");
+        println(Str.spaces(42), rptSum_001.getSum().format("$$$$,$$$,$$$.&&"));
+      }
+    }
+
+  }
+  
+
+  public void update_options(){
+    Char po = new Char(2);
+    _wm.displayAt(24, 7, "Current print option:");
+    po.set(" " + globals_0.print_option);
+    /**
+     *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+     */
+    Warning.warning("** W0146 **: Attribute COLOR(CYAN) not translated. Used by: Display");
+    _wm.displayAt(45, 7, Str.valueOf(po));
+    {
+      final Menu menu = _wm.createMenu("REPORT OPTIONS");
+      menu.addCommandListener(_wm.createCommand("File", "Send all reports to a file"), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          globals_0.print_option.set("f");
+          menu.stop();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Printer", "Send all reports to the printer"), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          globals_0.print_option.set("p");
+          menu.stop();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Screen", "Send all reports to the terminal screen"), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          globals_0.print_option.set("s");
+          menu.stop();
+        }
+      });
+      menu.addCommandListener(_wm.createCommand("Exit", "Return to REPORT Menu"), new InputAction() {
+        public void actionPerformed(java.util.EventObject _ae){
+          menu.stop();
+        }
+      });
+      menu.start();
+    }
+    _wm.displayAt(0, 7, "");
+  }
+  
+
+  public void print_backlog(){
+    /**
+     *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+     */
+    Warning.warning("** W0146 **: Attribute COLOR(RED) not translated. Used by: Display");
+    _wm.error("This option has not been implemented");
+  }
+  
+
+  public void print_stock(){
+    /**
+     *  @todo: Please review the following warnings thoroughly, they were generated during the migration process
+     */
+    Warning.warning("** W0146 **: Attribute COLOR(RED) not translated. Used by: Display");
+    _wm.error("This option has not been implemented");
+  }
+  
+  com.ais.demo.ID4_Main d4_main;
+
+  public com.ais.demo.ID4_Main getD4_Main(){
+    if (this.d4_main == null){
+      return this.d4_main = (com.ais.demo.ID4_Main)_app.getModule("com.ais.demo.D4_Main");
+    }
+    else {
+      return this.d4_main;
+    }
+  }
+  
+
+  public void setD4_Main(com.ais.demo.ID4_Main _D4_Main){
+    this.d4_main = _D4_Main;
+  }
+
+}

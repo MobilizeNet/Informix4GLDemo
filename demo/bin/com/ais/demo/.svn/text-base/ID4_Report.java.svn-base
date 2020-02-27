@@ -1,0 +1,35 @@
+package com.ais.demo;
+// Import declaration block
+
+public  interface ID4_Report {
+
+  void reports();
+  
+
+  void print_labels();
+  
+
+  void finishReportLabels_Report();
+  
+
+  void outputReportLabels_Report(Object... row);
+  
+
+  void print_ar();
+  
+
+  void finishReportAr_Report();
+  
+
+  void outputReportAr_Report(Object... row);
+  
+
+  void update_options();
+  
+
+  void print_backlog();
+  
+
+  void print_stock();
+
+}
