@@ -58,9 +58,19 @@ or
 docker stop ifx
 ```
 
+Using an IDE
+===========
+
+You can use any Java IDE.
+
+The following is an example using JDeveloper
+
+![4GL on JDeveloper](4GLOnJDeveloper.png)
+
 
 Demo Video
 ==========
 
 A small demo video can be seen here: 
-[Demo Video](informix_demo.mp4?raw=true)
+[Demo Video](informix_demo.swf?raw=true)
+
