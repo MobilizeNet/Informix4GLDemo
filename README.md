@@ -20,8 +20,7 @@ First, in order to run the demo you need to setup an Informix 4GL database.
 The easiest way is to just use docker.
 
 ```
-docker run -it --name ifx --privileged -p 9088:9088 -p 9089:9089 -p 27017:27017 -p 27018:27018 \
--p 27883:27883 -e LICENSE=accept -e DB_INIT=1 ibmcom/informix-developer-database:latest
+docker run -it --name ifx --privileged -p 9088:9088 -p 9089:9089 -p 27017:27017 -p 27018:27018 -p 27883:27883 -e LICENSE=accept -e DB_INIT=1 ibmcom/informix-developer-database:latest
 ```
 
 After starting the database you need to install the demo database.
