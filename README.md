@@ -22,6 +22,8 @@ The easiest way is to just use docker.
 ```
 docker run -it --name ifx --privileged -p 9088:9088 -p 9089:9089 -p 27017:27017 -p 27018:27018 -p 27883:27883 -e LICENSE=accept -e DB_INIT=1 ibmcom/informix-developer-database:latest
 ```
+Starting the database usually takes about 5-10 minutes. Wait until see you a message like:
+
 
 After starting the database you need to install the demo database.
 
