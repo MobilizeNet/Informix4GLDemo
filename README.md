@@ -49,6 +49,15 @@ clone this repository
 and run
 ./rundemo.sh or rundemo.bat
 
+> NOTE: to start the database container
+```
+docker start ifx
+```
+or
+```
+docker stop ifx
+```
+
 
 Demo Video
 ==========
