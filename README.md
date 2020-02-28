@@ -54,5 +54,4 @@ Demo Video
 ==========
 
 A small demo video can be seen here: 
-
-<a href="informix_demo.mp4" title="Demo Video">
+[Demo Video](informix_demo.mp4?raw=true)
