@@ -63,7 +63,7 @@ Using an IDE
 
 You can use any Java IDE.
 
-The following is an example using JDeveloper
+The following is an example using [JDeveloper](https://www.oracle.com/tools/downloads/Jdeveloper-12c-downloads.html)
 
 ![4GL on JDeveloper](4GLOnJDeveloper.png)
 
