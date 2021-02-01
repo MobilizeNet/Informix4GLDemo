@@ -1,9 +1,10 @@
-tasks:
-  - init: echo "Workspace Ready"
-    command: echo "Replace me with omething that should run on every start, or just
-      remove me entirely."
 image:
   file: .gitpod.Dockerfile
+  
+tasks:
+  - init: echo "Workspace Ready"
+    command: sudo bash install_informix.sh
+
 
 vscode:
   extensions:
